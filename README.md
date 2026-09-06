@@ -9,7 +9,9 @@ GH-300 preparation.
   card number, SQL injection, no docs, and (almost) no tests — so that Copilot has real
   work to do during `/fix`, `/tests`, review, refactor, and modernization demos.
 
-## Solution layout
+---
+
+## 📁 Solution layout
 
 ```
 CopilotDemoKit.sln
@@ -28,12 +30,16 @@ CopilotDemoKit.sln
 └─ global.json  (pins the .NET 8 SDK)
 ```
 
-## Prerequisites
+---
+
+## ✅ Prerequisites
 
 - .NET 8 SDK (`dotnet --list-sdks` should show an `8.0.x`; `global.json` pins it).
 - Visual Studio 2026 with the GitHub Copilot and Copilot Chat components, **or** VS Code + C# Dev Kit.
 
-## Build & run
+---
+
+## 🛠️ Build & run
 
 ```powershell
 dotnet build
@@ -44,7 +50,9 @@ dotnet test
 > The demo app wraps `Checkout` in a try/catch so the off-by-one bug surfaces as a
 > caught exception instead of crashing the walkthrough.
 
-## Files in this kit
+---
+
+## 📦 Files in this kit
 
 | Path | What it demonstrates |
 | --- | --- |
@@ -57,9 +65,11 @@ dotnet test
 | `.vscode/mcp.json` | MCP servers for agent mode (Visual Studio also discovers `.mcp.json` / `.vs\mcp.json`) |
 | `admin/content-exclusion-example.yml` | Content exclusion syntax |
 
-## Part A — Use GitHub Copilot in the IDE
+---
 
-### Demo 1 — Enable and scope Copilot (2 min)
+## 🅰️ Part A — Use GitHub Copilot in the IDE
+
+### 1️⃣ Demo 1 — Enable and scope Copilot (2 min)
 
 - Open **Tools > Options > GitHub > Copilot** and walk the Copilot settings (global enablement, completions, Next Edit Suggestions).
 - Use the **Copilot badge** in the top-right of the IDE to show/toggle Copilot state for the current session.
@@ -67,7 +77,9 @@ dotnet test
 
 > **Talking point:** in Visual Studio, enablement is managed through **Tools > Options > GitHub > Copilot** and the Copilot badge — not a `.vscode/settings.json` file (that map is a VS Code mechanism).
 
-### Demo 2 — Inline suggestions and Next Edit Suggestions (3 min)
+---
+
+### 2️⃣ Demo 2 — Inline suggestions and Next Edit Suggestions (3 min)
 
 - In `src/ShoppingCart/Cart.cs`, put the cursor at the end of the `ShoppingCartModule` class (after `Cart.cs:58`, before the closing `}` on `Cart.cs:59`) and type:
 
@@ -81,7 +93,9 @@ dotnet test
 
 > **Talking point:** ghost-text completions, partial accept, and edit-aware NES are different features; NES uses `Tab` to jump to and accept the next predicted edit.
 
-### Demo 3 — Inline chat and the chat panel (4 min)
+---
+
+### 3️⃣ Demo 3 — Inline chat and the chat panel (4 min)
 
 - Select the `Subtotal` method (`Cart.cs:38-46`), right-click > **Ask Copilot** (or use inline chat), and ask:
 
@@ -98,7 +112,9 @@ dotnet test
 
 > **Talking point:** the chat building blocks in Visual Studio are slash commands (`/explain`, `/fix`, `/tests`, `/doc`, `/optimize`), the `@workspace` participant for solution context (plus `@github` on Enterprise), and `#` references for files, methods, and classes (for example `#Cart.cs`, `#Subtotal`). Call out the limits: chat has a bounded context window and per-plan rate limits, and you can compact the conversation to free up space.
 
-### Demo 4 — Multi-file edits in Agent mode (4 min)
+---
+
+### 4️⃣ Demo 4 — Multi-file edits in Agent mode (4 min)
 
 - Open the chat window, switch the mode dropdown to **Agent**, and add both `src/ShoppingCart/Cart.cs` and `src/InventoryLegacy/InventoryLegacy.cs` as context (the `+` button).
 - Ask:
@@ -112,7 +128,9 @@ dotnet test
 
 > **Talking point:** Visual Studio agent mode drives multi-file, diff-first, reversible edits — it plans the change, edits across files, and asks before running commands.
 
-### Demo 5 — Agent mode (5 min)
+---
+
+### 5️⃣ Demo 5 — Agent mode (5 min)
 
 - Switch the chat to Agent, then ask:
 
@@ -126,7 +144,9 @@ dotnet test
 > **Talking point:** agent mode chooses its own files and tools, iterates on failures, and
 > asks before running commands.
 
-### Demo 6 — MCP in agent mode (3 min)
+---
+
+### 6️⃣ Demo 6 — MCP in agent mode (3 min)
 
 - Open the solution's `.mcp.json` (Visual Studio discovers `%USERPROFILE%\.mcp.json`, `<SolutionDir>\.mcp.json`, `<SolutionDir>\.vs\mcp.json`, and `<SolutionDir>\.vscode\mcp.json`).
 - In the chat window, switch to **Agent**, open the **tools** (wrench) icon, and enable the MCP-provided tools (tools are disabled by default per server).
@@ -139,7 +159,9 @@ dotnet test
 
 > **Talking point:** MCP extends agent mode with external systems using one open protocol; servers are configured per solution or per user, each tool is enabled explicitly, and every tool call is approval-gated.
 
-### Demo 7 — Agent sessions and delegation (3 min)
+---
+
+### 7️⃣ Demo 7 — Agent sessions and delegation (3 min)
 
 - On github.com, open the Agents panel (or assign an issue to Copilot) and delegate:
 
@@ -151,7 +173,9 @@ dotnet test
 > **Talking point:** delegated sessions run on GitHub-hosted compute; you review the PR like
 > any other contributor.
 
-### Demo 8 — Copilot CLI (5 min)
+---
+
+### 8️⃣ Demo 8 — Copilot CLI (5 min)
 
 - In a terminal at the repo root, start an interactive session:
 
@@ -175,9 +199,11 @@ dotnet test
 > IDE — it can explain commands, generate scripts, and act on files, and it asks for approval
 > before changing anything.
 
-## Part B — Code review, collaboration, and organization settings
+---
 
-### Demo 9 — Code review and custom review standards (4 min)
+## 🅱️ Part B — Code review, collaboration, and organization settings
+
+### 9️⃣ Demo 9 — Code review and custom review standards (4 min)
 
 - In `src/ShoppingCart/Cart.cs`, select `Checkout` (`Cart.cs:53-58`) > right-click > **Copilot Actions > Review Selection** to get inline review comments (or use the sparkle button in the **Git Changes** window to review local changes). Expect a flag on the logged card number (`Cart.cs:56`).
 - Open `.github/copilot-instructions.md`, show the Review standards section, and re-run the review to demonstrate that the guidance changes the comments.
@@ -186,7 +212,9 @@ dotnet test
 > **Talking point:** review standards are instructions-file driven, so review output is
 > consistent across the team.
 
-### Demo 10 — PR summaries, Spaces, and Spark (3 min)
+---
+
+### 🔟 Demo 10 — PR summaries, Spaces, and Spark (3 min)
 
 - On an open PR, use Copilot > Generate summary and show the walkthrough it writes.
 - Open a Copilot Space, attach this repo plus the study guide link, and ask a question that needs both.
@@ -194,7 +222,9 @@ dotnet test
 
 > **Talking point:** Spaces are curated, shareable context; Spark goes from prompt to running app.
 
-## Push to your own GitHub repo
+---
+
+## 🚀 Push to your own GitHub repo
 
 This kit is created locally and is **not** yet a git repository. To publish it:
 
