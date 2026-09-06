@@ -221,22 +221,3 @@ dotnet test
 - In Spark, describe a tiny inventory dashboard and let it build and deploy the app.
 
 > **Talking point:** Spaces are curated, shareable context; Spark goes from prompt to running app.
-
----
-
-## 🚀 Push to your own GitHub repo
-
-This kit is created locally and is **not** yet a git repository. To publish it:
-
-- Initialise the repo and make the first commit.
-- Point it at your own remote and push.
-
-```powershell
-cd C:\zah-workspace\GitHub-Copilot-Dev-Inter
-git init
-git add .
-git commit -m "Initial commit: GH-300 Copilot demo kit (.NET 8 port)"
-git branch -M main
-git remote add origin https://github.com/<your-account>/<your-repo>.git
-git push -u origin main
-```
