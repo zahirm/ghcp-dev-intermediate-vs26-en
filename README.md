@@ -148,7 +148,7 @@ dotnet test
 
 ### 6️⃣ Demo 6 — MCP in agent mode (3 min)
 
-- Open the solution's `.mcp.json` (Visual Studio discovers `%USERPROFILE%\.mcp.json`, `<SolutionDir>\.mcp.json`, `<SolutionDir>\.vs\mcp.json`, and `<SolutionDir>\.vscode\mcp.json`).
+- Open this kit's MCP config at `.vscode\mcp.json` (Visual Studio also discovers `%USERPROFILE%\.mcp.json`, `<SolutionDir>\.mcp.json`, and `<SolutionDir>\.vs\mcp.json`). In Solution Explorer, toggle **Show All Files** to reveal the dot-prefixed `.vscode` folder, or use **File > Open > File…** (`Ctrl+O`) and browse to it.
 - In the chat window, switch to **Agent**, open the **tools** (wrench) icon, and enable the MCP-provided tools (tools are disabled by default per server).
 - Ask:
 
