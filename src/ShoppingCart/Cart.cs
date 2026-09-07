@@ -37,10 +37,12 @@ public static class ShoppingCartModule
 
     public static double Subtotal(Cart cart)
     {
+        ArgumentNullException.ThrowIfNull(cart);
+
         double runningTotal = 0;
-        for (int i = 0; i < cart.Items.Count; i++)
+        foreach (CartItem item in cart.Items)
         {
-            runningTotal += cart.Items[i].Price * cart.Items[i].Qty;
+            runningTotal += item.Price * item.Qty;
         }
         return runningTotal;
     }

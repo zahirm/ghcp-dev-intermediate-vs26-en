@@ -1,13 +1,42 @@
 namespace ShoppingCart.Tests;
 
-// Intentionally minimal: this kit ships with essentially NO real tests so that the
-// Copilot "/tests" and agent-mode demos have meaningful work to do. Use unit-tests.prompt.md
-// to generate a proper suite for ShoppingCart (and watch it surface the off-by-one bug).
-public class SmokeTests
+public class ShoppingCartModuleTests
 {
     [Fact]
-    public void Placeholder_NoRealTestsYet()
+    public void Subtotal_ComputesCombinedItemTotals()
     {
-        Assert.True(true);
+        var cart = new Cart
+        {
+            Items =
+            [
+                new CartItem { Price = 12.5, Qty = 2 },
+                new CartItem { Price = 4.0, Qty = 3 },
+                new CartItem { Price = 1.25, Qty = 4 }
+            ]
+        };
+
+        Assert.Equal(12.5 * 2 + 4.0 * 3 + 1.25 * 4, ShoppingCartModule.Subtotal(cart));
+    }
+
+    [Theory]
+    [InlineData(0)]
+    [InlineData(1)]
+    public void Subtotal_HandlesBoundaryQuantities(int quantity)
+    {
+        var cart = new Cart
+        {
+            Items =
+            [
+                new CartItem { Price = 10.0, Qty = quantity }
+            ]
+        };
+
+        Assert.Equal(10.0 * quantity, ShoppingCartModule.Subtotal(cart));
+    }
+
+    [Fact]
+    public void Subtotal_ThrowsForNullCart()
+    {
+        Assert.Throws<ArgumentNullException>(() => ShoppingCartModule.Subtotal(null!));
     }
 }
